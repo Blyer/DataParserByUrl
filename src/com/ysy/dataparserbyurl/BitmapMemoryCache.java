@@ -29,12 +29,12 @@ public class BitmapMemoryCache
 
 	public Bitmap get(String key)
 	{
-		return lruCache.get(StringUtil.getPicName(key));
+		return lruCache.get(DataParserUtil.getPicName(key));
 	}
 
 	public void put(String key, Bitmap bmp)
 	{
-		lruCache.put(StringUtil.getPicName(key), bmp);
+		lruCache.put(DataParserUtil.getPicName(key), bmp);
 	}
 
 	public void clear()

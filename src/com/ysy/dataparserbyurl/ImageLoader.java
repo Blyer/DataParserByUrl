@@ -54,7 +54,7 @@ public class ImageLoader
 	{
 		pool = Executors.newFixedThreadPool(MAX_THREAD_COUNT);
 		bitmapMemoryCache = BitmapMemoryCache.getInstance();
-		sdcardCache = SdcardCache.getInstance();
+		sdcardCache = new SdcardCache();
 		handler = new Handler();
 	}
 

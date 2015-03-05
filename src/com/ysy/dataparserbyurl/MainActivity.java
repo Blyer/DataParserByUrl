@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -110,6 +112,8 @@ public class MainActivity extends Activity
 					@Override
 					public void loadingFinished(String urlAddr, String text)
 					{
+						if (text == null)
+							return;
 						if (tv.getTag().equals(urlAddr))
 						{
 							tv.setText(text.substring(0, 20));
@@ -138,6 +142,20 @@ public class MainActivity extends Activity
 				return data.size();
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
+	{
+		DataParserUtil.clearCache();
+		return super.onMenuItemSelected(featureId, item);
 	}
 
 }

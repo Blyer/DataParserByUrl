@@ -14,6 +14,7 @@ public class ParserBitmapFromNet
 	{
 		HttpURLConnection conn = null;
 		InputStream in = null;
+		SdcardCache sdcardCache = new SdcardCache();
 		try
 		{
 			URL url = new URL(urlAddr);
@@ -23,8 +24,8 @@ public class ParserBitmapFromNet
 			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK)
 			{
 				in = conn.getInputStream();
-				SdcardCache.getInstance().saveBitmap(urlAddr, in);
-				return SdcardCache.getInstance().getBitmap(urlAddr);
+				sdcardCache.saveBitmap(urlAddr, in);
+				return sdcardCache.getBitmap(urlAddr);
 			}
 		}
 		catch (MalformedURLException e)

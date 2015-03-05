@@ -10,6 +10,7 @@ public class ParserTextFromNet
 {
 	public static String getText(String urlAddr)
 	{
+		SdcardCache sdcardCache = new SdcardCache();
 		HttpURLConnection conn = null;
 		InputStream in = null;
 		try
@@ -21,8 +22,8 @@ public class ParserTextFromNet
 			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK)
 			{
 				in = conn.getInputStream();
-				SdcardCache.getInstance().saveText(urlAddr, in);
-				return SdcardCache.getInstance().getText(urlAddr);
+				sdcardCache.saveText(urlAddr, in);
+				return sdcardCache.getText(urlAddr);
 			}
 		}
 		catch (MalformedURLException e)

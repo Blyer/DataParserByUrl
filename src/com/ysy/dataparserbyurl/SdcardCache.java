@@ -15,25 +15,19 @@ public class SdcardCache
 {
 	private File savePath;
 
-	private static SdcardCache instance = new SdcardCache();
-
-	public static SdcardCache getInstance()
-	{
-		return instance;
-	}
-
-	private SdcardCache()
+	public SdcardCache()
 	{
 		if (isSdcardReady())
 		{
 			savePath = new File(Environment.getExternalStorageDirectory() + "/" + MyApplication.getContext().getPackageName() + "/cache");
-			savePath.mkdirs();
+			if (!savePath.exists())
+				savePath.mkdirs();
 		}
 	}
 
 	public void saveBitmap(String key, Bitmap bmp)
 	{
-		File file = new File(savePath, StringUtil.getPicName(key));
+		File file = new File(savePath, DataParserUtil.getPicName(key));
 		try
 		{
 			file.createNewFile();
@@ -53,7 +47,7 @@ public class SdcardCache
 
 	public void saveBitmap(String key, InputStream in)
 	{
-		File file = new File(savePath, StringUtil.getPicName(key));
+		File file = new File(savePath, DataParserUtil.getPicName(key));
 		try
 		{
 			file.createNewFile();
@@ -74,7 +68,7 @@ public class SdcardCache
 
 	public Bitmap getBitmap(String key)
 	{
-		File file = new File(savePath, StringUtil.getPicName(key));
+		File file = new File(savePath, DataParserUtil.getPicName(key));
 		if (file.exists())
 		{
 			Bitmap bmp = BitmapUtil.getBitmap(file.getAbsolutePath(), 100, 100);
@@ -92,7 +86,7 @@ public class SdcardCache
 
 	public void saveText(String key, InputStream in)
 	{
-		File file = new File(savePath, StringUtil.getTextName(key));
+		File file = new File(savePath, DataParserUtil.getTextName(key));
 		try
 		{
 			file.createNewFile();
@@ -113,7 +107,7 @@ public class SdcardCache
 
 	public String getText(String key)
 	{
-		File file = new File(savePath, StringUtil.getTextName(key));
+		File file = new File(savePath, DataParserUtil.getTextName(key));
 		if (file.exists())
 		{
 			StringBuilder builder = new StringBuilder();
@@ -156,7 +150,11 @@ public class SdcardCache
 
 	public void clear()
 	{
-
+		File[] listFiles = savePath.listFiles();
+		for (int i = 0; i < listFiles.length; i++)
+		{
+			listFiles[i].delete();
+		}
 	}
 
 	private boolean isSdcardReady()

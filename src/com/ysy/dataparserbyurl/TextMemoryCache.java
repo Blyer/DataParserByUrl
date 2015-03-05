@@ -5,7 +5,7 @@ import android.util.LruCache;
 public class TextMemoryCache
 {
 	private LruCache<String, String> lruCache;
-	private static final int DEFAULT_SIZE = 5;
+	private static final int DEFAULT_SIZE = 5 * 1024 * 1024;
 
 	private static TextMemoryCache instance = new TextMemoryCache();
 
@@ -28,12 +28,12 @@ public class TextMemoryCache
 
 	public String get(String key)
 	{
-		return lruCache.get(StringUtil.getTextName(key));
+		return lruCache.get(DataParserUtil.getTextName(key));
 	}
 
 	public void put(String key, String text)
 	{
-		lruCache.put(StringUtil.getTextName(key), text);
+		lruCache.put(DataParserUtil.getTextName(key), text);
 	}
 
 	public void clear()

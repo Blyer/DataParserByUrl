@@ -19,7 +19,7 @@ public class TextLoader
 	{
 		pool = Executors.newFixedThreadPool(MAX_THREAD_COUNT);
 		textCache = TextMemoryCache.getInstance();
-		sdcardCache = SdcardCache.getInstance();
+		sdcardCache = new SdcardCache();
 		handler = new Handler();
 	}
 
