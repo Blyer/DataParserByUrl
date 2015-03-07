@@ -29,7 +29,7 @@ public class ListAdapter extends BaseAdapter
 	{
 		mInflater = LayoutInflater.from(ctx);
 
-		mImageLoader = ImageLoader.getInstance();
+		mImageLoader = ImageLoader.getInstance(ctx.getApplicationContext());
 	}
 
 	public void setData(List<String> list)

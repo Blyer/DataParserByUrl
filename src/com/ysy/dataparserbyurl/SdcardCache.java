@@ -19,7 +19,7 @@ public class SdcardCache
 	{
 		if (isSdcardReady())
 		{
-			savePath = new File(Environment.getExternalStorageDirectory() + "/" + MyApplication.getContext().getPackageName() + "/cache");
+			savePath = new File(Environment.getExternalStorageDirectory() + "/" + DataParserUtil.getContext().getPackageName() + "/cache");
 			if (!savePath.exists())
 				savePath.mkdirs();
 		}

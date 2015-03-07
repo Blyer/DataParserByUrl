@@ -3,6 +3,7 @@ package com.ysy.dataparserbyurl;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 
@@ -38,15 +39,23 @@ public class ImageLoader
 	/**
 	 * ImageLoader类的唯一实例
 	 */
-	private static ImageLoader instance = new ImageLoader();
+	private static ImageLoader instance = null;
 
 	/**
 	 * 此类设计为单例模式，通过此静态方法获取ImageLoader类对象
 	 * 
 	 * @return ImageLoader对象
 	 */
-	public static ImageLoader getInstance()
+	public static ImageLoader getInstance(Context context)
 	{
+		if (DataParserUtil.getContext() == null)
+		{
+			DataParserUtil.setContext(context);
+		}
+		if (instance == null)
+		{
+			return new ImageLoader();
+		}
 		return instance;
 	}
 

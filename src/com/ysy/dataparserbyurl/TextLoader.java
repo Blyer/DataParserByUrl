@@ -3,6 +3,7 @@ package com.ysy.dataparserbyurl;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import android.content.Context;
 import android.os.Handler;
 
 public class TextLoader
@@ -13,7 +14,7 @@ public class TextLoader
 	private Handler handler;
 	private final int MAX_THREAD_COUNT = 2;
 
-	private static TextLoader instance = new TextLoader();
+	private static TextLoader instance = null;
 
 	private TextLoader()
 	{
@@ -23,8 +24,16 @@ public class TextLoader
 		handler = new Handler();
 	}
 
-	public static TextLoader getInstance()
+	public static TextLoader getInstance(Context context)
 	{
+		if (DataParserUtil.getContext() == null)
+		{
+			DataParserUtil.setContext(context);
+		}
+		if (instance == null)
+		{
+			return new TextLoader();
+		}
 		return instance;
 	}
 

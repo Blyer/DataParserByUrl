@@ -85,63 +85,64 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 
 		listView = (ListView)findViewById(R.id.listView);
-		// ListAdapter adapter = new ListAdapter(this);
-		// adapter.setData(Arrays.asList(urls));
-		listView.setAdapter(new BaseAdapter()
-		{
-			private List<String> data = Arrays.asList(textUrls);
-			private TextLoader loader = TextLoader.getInstance();
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent)
-			{
-				View view = convertView;
-
-				if (view == null)
-				{
-					view = View.inflate(MainActivity.this, R.layout.item_list, null);
-				}
-
-				final TextView tv = (TextView)view.findViewById(R.id.title);
-
-				final String url = (String)getItem(position);
-				tv.setTag(url);
-				loader.loadText(url, new TextLoader.OnLoadingFinishedListener()
-				{
-
-					@Override
-					public void loadingFinished(String urlAddr, String text)
-					{
-						if (text == null)
-							return;
-						if (tv.getTag().equals(urlAddr))
-						{
-							tv.setText(text.substring(0, 20));
-						}
-					}
-				});
-
-				return view;
-			}
-
-			@Override
-			public long getItemId(int position)
-			{
-				return position;
-			}
-
-			@Override
-			public Object getItem(int position)
-			{
-				return data.get(position);
-			}
-
-			@Override
-			public int getCount()
-			{
-				return data.size();
-			}
-		});
+		 ListAdapter adapter = new ListAdapter(this);
+		 adapter.setData(Arrays.asList(urls));
+		 listView.setAdapter(adapter);
+//		listView.setAdapter(new BaseAdapter()
+//		{
+//			private List<String> data = Arrays.asList(textUrls);
+//			private TextLoader loader = TextLoader.getInstance(MainActivity.this);
+//
+//			@Override
+//			public View getView(int position, View convertView, ViewGroup parent)
+//			{
+//				View view = convertView;
+//
+//				if (view == null)
+//				{
+//					view = View.inflate(MainActivity.this, R.layout.item_list, null);
+//				}
+//
+//				final TextView tv = (TextView)view.findViewById(R.id.title);
+//
+//				final String url = (String)getItem(position);
+//				tv.setTag(url);
+//				loader.loadText(url, new TextLoader.OnLoadingFinishedListener()
+//				{
+//
+//					@Override
+//					public void loadingFinished(String urlAddr, String text)
+//					{
+//						if (text == null)
+//							return;
+//						if (tv.getTag().equals(urlAddr))
+//						{
+//							tv.setText(text.substring(0, 20));
+//						}
+//					}
+//				});
+//
+//				return view;
+//			}
+//
+//			@Override
+//			public long getItemId(int position)
+//			{
+//				return position;
+//			}
+//
+//			@Override
+//			public Object getItem(int position)
+//			{
+//				return data.get(position);
+//			}
+//
+//			@Override
+//			public int getCount()
+//			{
+//				return data.size();
+//			}
+//		});
 	}
 	
 	@Override
